@@ -42,7 +42,7 @@ header {
 /* Estilos corporativos para el logotipo integrado */
 .logo-container {
     display: flex;
-    flex-direction: column; /* Alinea los textos de forma vertical y estética */
+    flex-direction: column; 
     line-height: 1.1;
     cursor: default;
 }
@@ -51,21 +51,20 @@ header {
     font-size: 1.6rem;
     font-weight: 800;
     letter-spacing: -0.5px;
-    background: linear-gradient(45deg, #00f2fe, #4facfe); /* Degradado cian/azul neón */
+    background: linear-gradient(45deg, #00f2fe, #4facfe); 
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent; /* Hace que el texto adopte el color transparente con degradado */
+    background-clip: text; /* Línea añadida para quitar subrayado en VS Code */
+    -webkit-text-fill-color: transparent; 
 }
 
 .logo-text-sub {
     font-size: 0.85rem;
     font-weight: 600;
     text-transform: uppercase;
-    color: #94a3b8; /* Gris azulado corporativo */
+    color: #94a3b8; 
     letter-spacing: 1.5px;
     margin-top: 2px;
 }
-
-
 
 nav {
     display: flex;
@@ -117,7 +116,6 @@ nav a:hover {
 
 /* 🖼️ SECCIÓN HERO CON IMAGEN LOCAL */
 .hero {
-    /* Corregido: Ahora lee tu archivo local 'fondo.png' que guardaste en la misma carpeta */
     background: linear-gradient(rgba(15, 23, 42, 0.75), rgba(30, 41, 59, 0.8)), url('fondo.png');
     background-size: cover;
     background-position: center;
@@ -162,10 +160,18 @@ nav a:hover {
     box-shadow: 0 6px 12px rgba(37, 99, 235, 0.3);
 }
 
+/* 🖼️ SECCIÓN MIS SERVICIOS CON IMAGEN DE FONDO LOCAL */
 .container {
     max-width: 1200px;
     margin: 5rem auto;
-    padding: 0 2rem;
+    padding: 4rem 2rem; 
+    /* Capa clara para mantener legibilidad y carga de servicios-fondo.png */
+    background: linear-gradient(rgba(248, 250, 252, 0.9), rgba(248, 250, 252, 0.95)), url('servicios-fondo.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 1rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
 }
 
 .section-title {
@@ -215,10 +221,36 @@ nav a:hover {
     text-align: justify;
 }
 
+/* Enlaces de WhatsApp individuales dentro de las tarjetas */
+.btn-service-whatsapp {
+    display: inline-block;
+    margin-top: 1.5rem;
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: color 0.3s;
+}
+
+.btn-service-whatsapp:hover {
+    color: var(--primary-hover);
+}
+
+/* 🖼️ SECCIÓN INICIA TU PROYECTO CON IMAGEN DE FONDO LOCAL */
 .contact-section {
-    background: var(--surface);
-    padding: 5rem 2rem;
+    padding: 6rem 2rem;
+    /* Capa oscura corporativa y carga de contacto-fondo.png */
+    background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(30, 41, 59, 0.9)), url('contacto-fondo.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     border-top: 1px solid #e2e8f0;
+}
+
+/* Forzar que el título de contacto sea blanco para resaltar sobre el fondo oscuro */
+.contact-section .section-title {
+    color: #ffffff;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
 }
 
 .contact-form {
@@ -238,7 +270,7 @@ nav a:hover {
 .form-group label {
     font-weight: 600;
     font-size: 0.9rem;
-    color: var(--secondary);
+    color: #e2e8f0; /* Cambiado a gris claro para contrastar sobre el fondo oscuro */
 }
 
 .form-group input, .form-group select, .form-group textarea {
@@ -326,5 +358,14 @@ footer {
 
     .hero h1 {
         font-size: 2.2rem;
+    }
+    
+    .container {
+        padding: 2rem 1rem;
+        margin: 3rem auto;
+    }
+    
+    .contact-section {
+        padding: 4rem 1rem;
     }
 }
