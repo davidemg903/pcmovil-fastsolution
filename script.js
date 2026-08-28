@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     
+    // El código del menú móvil se mantiene exactamente igual
     const menuToggle = document.getElementById('menuToggle');
     const navMenu = document.getElementById('navMenu');
     const navLinks = document.querySelectorAll('.nav-link');
@@ -16,22 +17,35 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // 📩 CÓDIGO NUEVO Y CORREGIDO PARA EL ENVÍO REAL DE CORREOS
     const contactForm = document.getElementById('contactForm');
 
     contactForm.addEventListener('submit', function(event) {
-        event.preventDefault();
+        event.preventDefault(); // Evitamos que la página se recargue bruscamente
         
         const name = document.getElementById('name').value.trim();
         const email = document.getElementById('email').value.trim();
-        const service = document.getElementById('service').value;
-        const message = document.getElementById('message').value.trim();
+        
+        // Creamos un contenedor con los datos del formulario para mandarlos a internet
+        const formData = new FormData(this);
 
-        if(name && email && service && message) {
-            alert(`¡Excelente decisión, ${name}!\n\nTu solicitud para el servicio de "${service}" ha sido registrada.\nMe pondré en contacto contigo al correo electrónico: ${email} a la brevedad.`);
-            this.reset();
-        } else {
-            alert('Por favor, asegúrate de completar correctamente todos los campos del formulario.');
-        }
+        // Enviamos los datos directamente a Formspree usando Fetch
+        fetch(this.action, {
+            method: this.method,
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
+        }).then(response => {
+            if (response.ok) {
+                // Si el correo se envió con éxito, se muestra la alerta al cliente
+                alert(`¡Excelente decisión, ${name}!\n\nTu solicitud ha sido recibida con éxito en Pc-Movil Fast Solution.\nMe pondré en contacto contigo al correo: ${email} a la brevedad.`);
+                contactForm.reset(); // Limpiamos los campos
+            } else {
+                alert('Hubo un problema al enviar tu mensaje. Por favor, intenta de nuevo o comunícate por WhatsApp.');
+            }
+        }).catch(error => {
+            alert('Error de conexión. Por favor, verifica tu internet o escríbenos directamente a WhatsApp.');
+        });
     });
-
 });
